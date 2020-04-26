@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        overflow-x:hidden;
+        margin: auto;
+      }
+      table {
+        margin: 5%;        
+      }
+      table td{
+        padding: 10px;
+      }
+      #warning {
+        color: red;
+      }
+      .spac {
+        margin:0 3%;
+      }
+      .textbox {
+        width: 50%;
+      }
+      .numbs {
+        width: 15%;
+      }
+      #host {
+        font-size: x-large;
+      }
+    </style>
+    <title>Bingo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="app.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron shadow mt-5 py-2 spac">
+
+    <div class="text-center">
+      <h1 style="font-family: Times New Roman">Tambola Ticket Generator</h1>
+    <form action="" class="form-group">
+
+    Bingo Card Size: &nbsp; <input class="numbs" type="number" value="3" id="cols"> By &nbsp;<input type="number" class="numbs" value="3" name="" id="rows"> 
+    <br/><br/>
+    Number of Tickets: <input type="number" class="numbs" value="9" name="" id="no_of_tickets">
+    <br/>
+    <p id="warning"></p>
+    Choose an option
+    <select id="ddlViewBy" onchange="change_input()">
+      <option value="1" selected="selected">Select</option>
+      <option value="2">Words</option>
+      <option value="3">Numbers</option>
+    </select>
+    <br/>
+    Enter words or numbers seperated by Comma <br/>
+    
+    <textarea class="textbox" name="" id="input-words" cols=50 rows=7></textarea>
+  
+    </form>
+
+
+    <button type="button" class="btn btn-success" value="Generate Table" onclick="checksize()"> Generate Tickets </button>
+    <button type="button" class="btn btn-info" value="Host" onclick="getrandomnos()"> Host </button>
+    <br/>
+    <br/>
+    <b><p id="host"> </p></b>
+  </div>
+
+  <div class="row">
+    <div id="dvTable1" class="col-sm"><p id="ticket1"></p></div>
+    <div id="dvTable2" class="col-sm"><p id="ticket2"></p></div>
+    <div id="dvTable3" class="col-sm"><p id="ticket3"></p></div>
+
+  </div>
+
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
