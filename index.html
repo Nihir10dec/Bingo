@@ -7,10 +7,13 @@
         margin: auto;
       }
       table {
-        margin: 5%;        
+        margin: 5%;
+        border: 2px solid black;     
       }
       table td{
         padding: 10px;
+        width:10%;
+        font-size: larger;
       }
       #warning {
         color: red;
@@ -32,22 +35,28 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="app.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
     <div class="jumbotron shadow mt-5 py-2 spac">
-
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary mr-auto">How to Play <i class='fas fa-dice' style='font-size:25px;'></i></button>
+        
+        <button class="btn btn-warning ml-auto">Prizes <i class="fa fa-trophy" aria-hidden="true"></i></button>
+      </div>
     <div class="text-center">
-      <h1 style="font-family: Times New Roman">Tambola Ticket Generator</h1>
+      <br/> 
     <form action="" class="form-group">
-
+      <h1 style="font-family: Copperplate; color:crimson;">Tambola Ticket Generator</h1>
     Bingo Card Size: &nbsp; <input class="numbs" type="number" value="3" id="cols"> By &nbsp;<input type="number" class="numbs" value="3" name="" id="rows"> 
     <br/><br/>
-    Number of Tickets: <input type="number" class="numbs" value="9" name="" id="no_of_tickets">
+    Number of Tickets: <input type="number" class="numbs" value="15" name="" id="no_of_tickets">
     <br/>
+
+
     <p id="warning"></p>
     Choose an option
     <select id="ddlViewBy" onchange="change_input()">
@@ -59,24 +68,54 @@
     Enter words or numbers seperated by Comma <br/>
     
     <textarea class="textbox" name="" id="input-words" cols=50 rows=7></textarea>
-  
-    </form>
+    <br/>
+    Color of Font in the Ticket: 
+    <input type="radio" name="random" id="randomcolor" checked onclick="hide_cust_color();"> Random Colors
+    <input type="radio" name="random" id="customcolor" onclick="show_cust_color();"> Custom Color
+    <div id="cust_color" style="display: none;">
+    Choose a Custom Color : <input type="color" name="customised_color" id="choosed_color">
+    </div>
+    <br/>
 
 
     <button type="button" class="btn btn-success" value="Generate Table" onclick="checksize()"> Generate Tickets </button>
     <button type="button" class="btn btn-info" value="Host" onclick="getrandomnos()"> Host </button>
+    <input type="button" class="btn btn-danger" value="Reset" onclick="window.location.reload()">
+  </form>
     <br/>
     <br/>
     <b><p id="host"> </p></b>
   </div>
-
-  <div class="row">
+  <button class="btn btn-dark" id="print_btn" style="display: none; margin: auto;" onclick="printDiv()">Print</button>
+  <div id="printable">
+  <div class="row" >
     <div id="dvTable1" class="col-sm"><p id="ticket1"></p></div>
     <div id="dvTable2" class="col-sm"><p id="ticket2"></p></div>
     <div id="dvTable3" class="col-sm"><p id="ticket3"></p></div>
 
   </div>
+  
+    </div>
+  </div>
 
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Prizes</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
     </div>
 
 

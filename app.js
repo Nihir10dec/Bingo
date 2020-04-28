@@ -1,3 +1,4 @@
+var print= false;
 function checksize(){
     var input_string = document.getElementById("input-words").value;
     var cols = document.getElementById("cols").value;
@@ -8,11 +9,17 @@ function checksize(){
 
     if(ilen< (rows*cols)*2){
         console.log("warning")
-        warning.innerHTML="You should at least enter " + rows*cols*2 +" items.";
+        //warning.innerHTML="You should at least enter " + rows*cols*2 +" items.";
+        alert("You should at least enter " + rows*cols*2 +" words or numbers.")
     }
     else{
         warning.innerHTML="";
         maketables();
+        print=true;
+    }
+    if(print){
+        var print_btn = document.getElementById("print_btn");
+        print_btn.style.display = "Block";
     }
 }
 
@@ -31,20 +38,20 @@ async function maketables() {
     var no_of_tickets = document.getElementById("no_of_tickets").value;
     console.log(no_of_tickets/3);
     for(var i=0;i<Math.floor(no_of_tickets/3);i++){
-        await sleep(250);
+        //await sleep(250);
         var table1 = GenerateTable();
         var caption1 = table1.createCaption()
-        caption1.innerHTML = "<center><b>Ticket " + String(Number((i*3)+1))+ "</b></center>";
+        caption1.innerHTML = "<center><b>Ticket " + String(Math.floor(Number((0*no_of_tickets/3)+i+1)))+ "</b></center>";
         dvTable1.appendChild(table1)
-        await sleep(250);
+        //await sleep(250);
         var table2 = GenerateTable();
         var caption2 = table2.createCaption()
-        caption2.innerHTML = "<center><b>Ticket " + String(Number((i*3)+2))+ "</b></center>";
+        caption2.innerHTML = "<center><b>Ticket " + String(Math.floor(Number((1*no_of_tickets/3)+i+1)))+ "</b></center>";
         dvTable2.appendChild(table2);
-        await sleep(250);
+        //await sleep(250);
         var table3 = GenerateTable();
         var caption3 = table3.createCaption()
-        caption3.innerHTML = "<center><b>Ticket " + String(Number((i*3)+3))+ "</b></center>";
+        caption3.innerHTML = "<center><b>Ticket " + String(Math.floor(Number((2*no_of_tickets/3)+i+1)))+ "</b></center>";
         dvTable3.appendChild(table3);
         
     }
@@ -52,22 +59,21 @@ async function maketables() {
     if(rem==1){
         var table1 = GenerateTable();
         var caption1 = table1.createCaption()
-        caption1.innerHTML = "<center>Ticket " + String(Number((i*3)+1))+ "</center>";
+        caption1.innerHTML = "<center><b>Ticket " + String(Number((i*3)+1))+ "</b></center>";
         dvTable1.appendChild(table1);
     }
     else if(rem==2){
         var table1 = GenerateTable();
         var caption1 = table1.createCaption()
-        caption1.innerHTML = "<center>Ticket " + String(Number((i*3)+1))+ "</center>";
+        caption1.innerHTML = "<center><b>Ticket " + String(Number((i*3)+1))+ "</b></center>";
         dvTable1.appendChild(table1);
         var table2 = GenerateTable();
         var caption2 = table2.createCaption()
-        caption2.innerHTML = "<center>Ticket " + String(Number((i*3)+2))+ "</center>";
+        caption2.innerHTML = "<center><b>Ticket " + String(Number((i*3)+2))+ "</b></center>";
         dvTable2.appendChild(table2);
     }
 
 }
-
 
 
 function GenerateTable() {
@@ -90,29 +96,44 @@ function GenerateTable() {
             rand_words.push(inputs[num]);
         }
     }
-
+    var custom_color = document.getElementById("choosed_color").value;
+    var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+    var radio = document.getElementById("customcolor").checked;
     //Add the data rows.
     for (var i = 0; i < rows; i++) {
         row = table.insertRow(-1);
         for (var j = 0; j < cols; j++) {
+            var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
             var num = Math.floor(Math.random() * inputs.length)
             var cell = row.insertCell(-1);
             cell.innerHTML = rand_words[(i*3)+j];
+            if(!radio){
+            cell.style.color = randomColor;
+            }
+            else{
+                cell.style.color = custom_color;
+            }
         }
     }
     return table;
 }
-
+var nos_done=[]
 function getrandomnos(){
     var input_string = document.getElementById("input-words").value;
     var inputs =  input_string.split(",");
-    var num = Math.floor(Math.random() * inputs.length);
-    
-    var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    
+    do{
+        var num = Math.floor(Math.random() * inputs.length);
+    }
+    while(nos_done.includes(num));
 
+    nos_done.push[num];
+
+    var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);   
     var host = document.getElementById("host");
-    host.innerHTML = inputs[num].toUpperCase() ;
+
+    var len = nos_done.length
+    
+    host.innerHTML += +inputs[nos_done[len-1]].toUpperCase() + " ";
     host.style.color = randomColor;
 }
 
@@ -132,3 +153,28 @@ function change_input(){
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+function show_cust_color(){
+    console.log("trying to show");
+    var cust_color = document.getElementById("cust_color");
+    cust_color.style.display="Block";
+}
+
+function hide_cust_color(){
+    console.log("trying to hide");
+    var cust_color = document.getElementById("cust_color");
+    cust_color.style.display="None";
+}
+
+function printDiv() {
+    var printContents = document.getElementById('printable').innerHTML;
+    var originalContents = document.body.innerHTML;
+    w=window.open();
+    w.document.body.innerHTML = printContents;
+
+    w.print();
+    console.log("aage badha");
+    document.body.innerHTML = originalContents;
+    
+    w.close();
+}
