@@ -39,13 +39,16 @@
     <script src="app.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
     <div class="jumbotron shadow mt-5 py-2 spac">
       <div class="d-flex justify-content-between">
-        <button class="btn btn-primary mr-auto">How to Play <i class='fas fa-dice' style='font-size:25px;'></i></button>
+        <button class="btn btn-primary mr-auto" data-toggle="modal" data-target="#how_to_play">How to Play <i class='fas fa-dice' style='font-size:25px;'></i></button>
         
-        <button class="btn btn-warning ml-auto">Prizes <i class="fa fa-trophy" aria-hidden="true"></i></button>
+        <button class="btn btn-warning ml-auto" data-toggle="modal" data-target="#prize">Rules & Prizes <i class="fa fa-trophy" aria-hidden="true"></i></button>
       </div>
     <div class="text-center">
       <br/> 
@@ -98,17 +101,26 @@
     </div>
   </div>
 
-    <div id="myModal" class="modal fade" role="dialog">
+    <div id="how_to_play" class="modal fade" role="dialog">
       <div class="modal-dialog">
     
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header text-center">
+            <h3 class="text-center">How to Play</h3>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Prizes</h4>
+            <h4 class="modal-title"></h4>
           </div>
           <div class="modal-body">
-            
+            <ol>
+              <li>Get a Tambola Card and a pencil. Experienced players can try their luck with more than one card but new players should avoid doing it.</li>
+              <li>Game will start from House # 1. Do not play for any other House until House 1 completion is announced by the Tambola Master.</li>
+              <li>Tambola Master will call random numbers between 1 and 90. Listen carefully and cut each number that is present in the current house on your card. "Nicknames" with each number may be used by Tambola Master to make things interesting. (E.g. Ulta pulta 69 etc.)</li>
+              <li>As soon as all numbers are cut/marked in your current House, raise your hand and yell BINGO very loudly. You have won FULL HOUSE!</li>
+              <li>If someone else raises hand and yells before you, you will not get the prize even if your claim is correct! Be quick!</li>
+              <li>Once someone has completed FULL HOUSE, game will continue for COTTAGE prize.</li>
+              <li>In each house, Tambola Master will give 2 extra winning conditions for extra prizes. These prizes will be given before FULL HOUSE. Please read below table for details.</li>
+            </ol>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -118,8 +130,103 @@
       </div>
     </div>
 
+    <div id="prize" class="modal fade" role="dialog"  id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
 
+          <div class="modal-header">
+            <h3 ng-hide="newUser">Rules & Prizes</h3>
+            <button type="button" class="close" data-dismiss="modal">×</button>            
+          </div>       
+          
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#rules" role="tab" aria-controls="home" aria-selected="true">Rules</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#prizes" role="tab" aria-controls="profile" aria-selected="false">Prizes</a>
+            </li>
+          </ul>
 
+          <div class="modal-body">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="rules" role="tabpanel" aria-labelledby="home-tab">
+
+              <ul>
+                <li>In case of a TIE, the prize will be given to the player who claimed it first.</li>
+                <li>If a player has already won a prize in a house, s/he can't claim another WINNING in the same house, other than FULL HOUSE.</li>
+                <li>A player can claim a WINNING only before the next NUMBER is called out (e.g. Say 50 was called out and a player wins on # 50. He/she does not claim his/her WINNING before the next # is called out. Then he/she can't claim his/her winning.)</li>
+                <li>If a player claims that s/he has won, the claimer’s card will be checked. If a claim is found to be false, claimer’s card is DEFAULTER i.e. this card cannot play further. In such a case, if there are any prizes already won on this card then the player doesn't lose already won prizes.</li>
+              </ul>
+
+            </div>
+
+            <div class="tab-pane fade" id="prizes" role="tabpanel" aria-labelledby="profile-tab">
+
+              <table class="table table-striped" style="border: 1px; margin:auto; font-size:smaller; padding:0%">
+                <tr>
+                  <th>Prize Name</th>
+                  <th>Winnning Condition</th>
+                </tr>
+                <tr>
+                  <td>Top Line</td>
+                  <td>Complete the top row.</td>
+                </tr>
+                <tr>
+                  <td>Bottom Line</td>
+                  <td>Complete the bottom row.</td>
+                </tr>
+                <tr>
+                  <td>Middle Line</td>
+                  <td>Complete the middle row.</td>
+                </tr>
+                <tr>
+                  <td>Pyramid</td>
+                  <td>Mark 1 number from the first row, 2 from the second row and 3 from the third row.</td>
+                </tr>
+                <tr>
+                  <td>Inverted Pyramid</td>
+                  <td>Comprising of three numbers from the first row two from the second row and one from the third row.</td>
+                </tr>
+                <tr>
+                  <td>Four Corners</td>
+                  <td>Mark left most and right most numbers of top row and bottom row.</td>
+                </tr>
+                <tr>
+                  <td>Six Corners</td>
+                  <td>Mark numbers at the extreme left and extreme right of all 3 rows.</td>
+                </tr>
+                <tr>
+                  <td>Jaldi 5</td>
+                  <td>Mark any 5 numbers before others. Jaldi 4, Jaldi 6, etc, may also be given by Tambola Master instead of Jaldi 5.</td>
+                </tr>
+                <tr>
+                  <td>Sandwich</td>
+                  <td>2 numbers from top row, 1 from the middle and 2 numbers from the bottom row.</td>
+                </tr>
+                <tr>
+                  <td>Cattage</td>
+                  <td>When all the numbers in one house are crossed off after someone has already claimed FULL HOUSE.</td>
+                </tr>
+                <tr>
+                  <td>FULL HOUSE</td>
+                  <td>When all the numbers in one House (1 to 5) are crossed off.</td>
+                </tr>
+  
+              </table>
+
+            </div>
+            
+          </div>
+        </div>
+
+            
+        </div>
+    </div>        
+
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

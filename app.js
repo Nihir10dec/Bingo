@@ -1,4 +1,4 @@
-var print= false;
+var printz= false;
 function checksize(){
     var input_string = document.getElementById("input-words").value;
     var cols = document.getElementById("cols").value;
@@ -8,16 +8,16 @@ function checksize(){
     var ilen = inputs.length
 
     if(ilen< (rows*cols)*2){
-        console.log("warning")
+        //console.log("warning")
         //warning.innerHTML="You should at least enter " + rows*cols*2 +" items.";
         alert("You should at least enter " + rows*cols*2 +" words or numbers.")
     }
     else{
         warning.innerHTML="";
         maketables();
-        print=true;
+        printz=true;
     }
-    if(print){
+    if(printz){
         var print_btn = document.getElementById("print_btn");
         print_btn.style.display = "Block";
     }
@@ -36,7 +36,7 @@ async function maketables() {
     dvTable2.innerHTML = "";
     dvTable3.innerHTML = "";
     var no_of_tickets = document.getElementById("no_of_tickets").value;
-    console.log(no_of_tickets/3);
+    //console.log(no_of_tickets/3);
     for(var i=0;i<Math.floor(no_of_tickets/3);i++){
         //await sleep(250);
         var table1 = GenerateTable();
@@ -84,7 +84,7 @@ function GenerateTable() {
     var input_string = document.getElementById("input-words").value;
     //console.log(typeof(input_words));
     var inputs =  input_string.split(",");
-    console.log(inputs[4]);
+    //console.log(inputs[4]);
     var table = document.createElement("TABLE");
     table.border = "1";
 
@@ -141,7 +141,7 @@ function change_input(){
     var e = document.getElementById("ddlViewBy");
     var strUser = e.options[e.selectedIndex].value;
     var textbox = document.getElementById("input-words");
-    console.log(strUser);
+    //console.log(strUser);
     if(strUser==2){
         textbox.value = "war,farm,national,brave,answer,opinion,typical,according,motion,square,finally,strong,afraid,load,cap,burn,her,donkey,powerful,operation,look,everywhere,low,higher,shape,soap,journey,handle,do,chamber,seat,develop,nervous,add,against,yesterday,flow,past,radio,effect,tight,biggest";
     }
@@ -150,31 +150,26 @@ function change_input(){
     }
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
 function show_cust_color(){
-    console.log("trying to show");
+    //console.log("trying to show");
     var cust_color = document.getElementById("cust_color");
     cust_color.style.display="Block";
 }
 
 function hide_cust_color(){
-    console.log("trying to hide");
+    //console.log("trying to hide");
     var cust_color = document.getElementById("cust_color");
     cust_color.style.display="None";
 }
 
 function printDiv() {
+    
     var printContents = document.getElementById('printable').innerHTML;
     var originalContents = document.body.innerHTML;
-    w=window.open();
-    w.document.body.innerHTML = printContents;
 
-    w.print();
-    console.log("aage badha");
+    document.body.innerHTML = printContents;
+
+    window.print();
+    //console.log("aage badha");
     document.body.innerHTML = originalContents;
-    
-    w.close();
 }
